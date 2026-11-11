@@ -3,6 +3,7 @@ import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { ApplicationForm } from './pages/application-form/application-form';
 import { ApplicationList } from './pages/application-list/application-list';
+import { RegisterCustomer } from './pages/register-customer/register-customer';
 
 export const routes: Routes = [
   {
@@ -25,5 +26,9 @@ export const routes: Routes = [
   {
     path: 'application-list',
     component: ApplicationList
+  },
+  {
+    path: 'register-customer',
+    component: RegisterCustomer
   }
 ];
