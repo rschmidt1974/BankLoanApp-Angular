@@ -9,28 +9,29 @@
 
           <div class="card-body p-4 p-md-5">
             <form>
+
               <div class="mb-3">
-                <label for="userName" class="form-label fw-semibold">Username</label>
-                <input type="text" id="userName" class="form-control rounded-3" placeholder="Enter your username" />
+                <label for="fullName" class="form-label fw-semibold">Full name</label>
+                <input type="text" id="fullName" [(ngModel)]="newUserObj.fullName" name="fullName" class="form-control rounded-3" placeholder="Enter your full name" />
               </div>
 
               <div class="mb-3">
                 <label for="email" class="form-label fw-semibold">Email</label>
-                <input type="email" id="email" class="form-control rounded-3" placeholder="Enter your email" />
+                <input type="email" id="email" [(ngModel)]="newUserObj.email" name="email" class="form-control rounded-3" placeholder="Enter your email" />
               </div>
 
               <div class="mb-3">
-                <label for="fullName" class="form-label fw-semibold">Full name</label>
-                <input type="text" id="fullName" class="form-control rounded-3" placeholder="Enter your full name" />
+                <label for="userName" class="form-label fw-semibold">User Name</label>
+                <input type="text" id="userName" [(ngModel)]="newUserObj.userName" name="userName" class="form-control rounded-3" placeholder="Enter your user name" />
               </div>
 
               <div class="mb-4">
                 <label for="password" class="form-label fw-semibold">Password</label>
-                <input type="password" id="password" class="form-control rounded-3" placeholder="Create a password" />
+                <input type="password" id="password" [(ngModel)]="newUserObj.password" name="password" class="form-control rounded-3" placeholder="Create a password" />
               </div>
 
               <div class="d-grid">
-                <button type="submit" class="btn btn-success btn-lg rounded-pill px-4 fw-semibold">Register</button>
+                <button type="button" (click)="onSaveCustomer()" class="btn btn-success btn-lg rounded-pill px-4 fw-semibold">Register</button>
               </div>
             </form>
           </div>
