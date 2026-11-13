@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { UserLoginModel } from '../models/User.Model';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IApiResponseModel } from '../models/API.Response.Model';
 
 @Injectable({
@@ -11,6 +11,7 @@ export class Master {
 
   http = inject(HttpClient);
   api_url: string = 'https://api.freeprojectapi.com/api/BankLoan/';
+  loginSubject$ : Subject<void> = new Subject<void>();
 
   onRegisterCustomer(obj:any) {
     return this.http.post(this.api_url + 'RegisterCustomer', obj);

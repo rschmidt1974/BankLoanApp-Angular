@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserLoginModel } from '../../models/User.Model';
 import { FormsModule } from '@angular/forms';
 import { Master } from '../../services/master';
 import { IApiResponseModel } from '../../models/API.Response.Model';
-import { Auth } from '../../services/auth';
 
 @Component({
   standalone: true,
@@ -15,14 +15,16 @@ import { Auth } from '../../services/auth';
 export class Login {
   loginObj: UserLoginModel = new UserLoginModel();
   masterService = inject(Master);
-  auth = inject(Auth);
+  router = inject(Router);
+
 
   onLoginUser() {
     this.masterService.onLogin(this.loginObj).subscribe({
       next: (res: IApiResponseModel) => {
         if(res.result) {
-          alert("User Found, Logging in");
-          this.auth.setLoggedInUser(res.data, this.loginObj.userName);
+          localStorage.setItem('bankloanuser', JSON.stringify(res.data));
+          this.masterService.loginSubject$.next();
+          void this.router.navigate(['/home']);
         } else {
           alert(res.message);
         }
