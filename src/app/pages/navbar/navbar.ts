@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 @Component({
   standalone: true,
@@ -8,4 +9,12 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.css',
   templateUrl: './navbar.html',
 })
-export class Navbar {}
+export class Navbar {
+  readonly auth = inject(Auth);
+  private readonly router = inject(Router);
+
+  logoff(): void {
+    this.auth.logoff();
+    void this.router.navigate(['/home']);
+  }
+}

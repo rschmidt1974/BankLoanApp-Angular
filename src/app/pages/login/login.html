@@ -1,1 +1,76 @@
-<p>login works!</p>
+<main class="py-5 bg-body-tertiary">
+  <div class="container py-lg-4">
+    <div class="row justify-content-center align-items-stretch g-0">
+      <div class="col-lg-5 d-none d-lg-flex">
+        <section class="w-100 bg-success text-white rounded-start-4 p-5 d-flex flex-column justify-content-between">
+          <div>
+            <span class="d-inline-flex align-items-center justify-content-center rounded-3 bg-white text-success fw-bold p-2 mb-4" aria-hidden="true">H</span>
+            <p class="text-uppercase small fw-semibold text-white-50 mb-2">Welcome to Harborline</p>
+            <h1 class="display-6 fw-bold mb-3">Good to have you back.</h1>
+            <p class="text-white-50 mb-0">Sign in to pick up where you left off and review your loan application.</p>
+          </div>
+          <p class="small text-white-50 mb-0">Your next step, on your schedule.</p>
+        </section>
+      </div>
+
+      <div class="col-12 col-md-8 col-lg-5">
+        <section class="card h-100 border-0 shadow-sm rounded-4">
+          <div class="card-body p-4 p-md-5">
+            <div class="mb-4">
+              <p class="text-success text-uppercase fw-semibold small mb-2">Customer sign in</p>
+              <h2 class="h2 fw-bold text-dark mb-2">Welcome back</h2>
+              <p class="text-secondary mb-0">Enter your details to access your account.</p>
+            </div>
+
+            <form (submit)="onLoginUser()">
+              <div class="mb-3">
+                <label for="userName" class="form-label fw-semibold">Username or email</label>
+                <input
+                  type="text"
+                  id="userName"
+                  name="userName"
+                  class="form-control form-control-lg rounded-3"
+                  [(ngModel)]="loginObj.userName"
+                  placeholder="Enter your username or email"
+                  autocomplete="username"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label fw-semibold">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control form-control-lg rounded-3"
+                  [(ngModel)]="loginObj.password"
+                  placeholder="Enter your password"
+                  autocomplete="current-password"
+                  required
+                />
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="remember-me" name="remember-me" />
+                  <label class="form-check-label text-secondary" for="remember-me">Remember me</label>
+                </div>
+                <a class="small text-success fw-semibold text-decoration-none" href="#">Forgot password?</a>
+              </div>
+
+              <div class="d-grid">
+                <button type="submit" class="btn btn-success btn-lg rounded-pill fw-semibold">Sign in</button>
+              </div>
+            </form>
+
+            <p class="text-center text-secondary mt-4 mb-0">
+              New to Harborline?
+              <a class="text-success fw-semibold text-decoration-none" href="/register-customer">Create an account</a>
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
