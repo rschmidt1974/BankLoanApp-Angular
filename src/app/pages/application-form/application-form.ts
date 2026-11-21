@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Master } from '../../services/master';
+import { IApiResponseModel } from '../../models/API.Response.Model';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   selector: 'app-application-form',
   styleUrl: './application-form.css',
   templateUrl: './application-form.html',
@@ -11,6 +14,12 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 export class ApplicationForm {
 
   applicationForm!: FormGroup;
+  masterSrv = inject(Master);
+  router = inject(Router);
+
+  constructor() {
+    this.initializeForm();
+  }
 
   initializeForm() {
     this.applicationForm = new FormGroup({
@@ -33,8 +42,12 @@ export class ApplicationForm {
       customerId: new FormControl(0),
       Loans: new FormArray([])
     });
-    this.loanDetails.push(this.addNewLoan());
+    this.addNewLoanForm();
 
+  }
+
+  addNewLoanForm() {
+    this.loanDetails.push(this.addNewLoan());
   }
 
   get loanDetails() {
@@ -48,6 +61,20 @@ export class ApplicationForm {
       bankName: new FormControl(""),
       loanAmount: new FormControl(""),
       emi: new FormControl("")
+    });
+  }
+
+  onSaveApplication() {
+    const formValue = this.applicationForm.value;
+    this.masterSrv.saveLoanApplication(formValue).subscribe({
+      next: (res: IApiResponseModel) => {
+        if(res.result) {
+          alert('Application saved successfully!');
+          this.router.navigateByUrl('/application-list');
+        } else {
+          alert(res.message);
+        }
+      }
     });
   }
 }

@@ -21,7 +21,7 @@ export interface UserModel{
   refreshTokenExpiryTime: any
 }
 
-export interface Root {
+export interface ILoanApplication {
   applicantID: number
   fullName: string
   applicationStatus: string

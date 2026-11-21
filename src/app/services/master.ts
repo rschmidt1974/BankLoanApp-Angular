@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { UserLoginModel } from '../models/User.Model';
+import { ILoanApplication, UserLoginModel } from '../models/User.Model';
 import { Observable, Subject } from 'rxjs';
 import { IApiResponseModel } from '../models/API.Response.Model';
 
@@ -19,5 +19,9 @@ export class Master {
 
   onLogin(loginObj: UserLoginModel): Observable<IApiResponseModel> {
     return this.http.post<IApiResponseModel>(this.api_url + 'Login', loginObj);
+  }
+
+  saveLoanApplication(obj: ILoanApplication): Observable<IApiResponseModel> {
+    return this.http.post<IApiResponseModel>(this.api_url + 'AddNewApplication', obj);
   }
 }
