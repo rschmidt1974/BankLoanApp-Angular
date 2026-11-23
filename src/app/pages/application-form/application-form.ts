@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular
 import { Master } from '../../services/master';
 import { IApiResponseModel } from '../../models/API.Response.Model';
 import { Router } from '@angular/router';
+import { UserModel } from '../../models/User.Model';
 
 @Component({
   standalone: true,
@@ -16,9 +17,19 @@ export class ApplicationForm {
   applicationForm!: FormGroup;
   masterSrv = inject(Master);
   router = inject(Router);
+  loggedUserData!: UserModel;
 
   constructor() {
     this.initializeForm();
+    const local = localStorage.getItem('bankloanuser');
+    if(local) {
+      this.loggedUserData = JSON.parse(local);
+      this.applicationForm.patchValue({
+        fullName: this.loggedUserData.fullName,
+        email: this.loggedUserData.emailId,
+        customerId: this.loggedUserData.userId
+      });
+    }
   }
 
   initializeForm() {
@@ -39,7 +50,7 @@ export class ApplicationForm {
       creditScore: new FormControl(0),
       assets: new FormControl(''),
       dateApplied: new FormControl(''),
-      customerId: new FormControl(0),
+      customerId: new FormControl(this.loggedUserData.userId),
       Loans: new FormArray([])
     });
     this.addNewLoanForm();
